@@ -62,16 +62,6 @@ local LangPack = {
     }
 }
 
--- [[ POPUP CLICK EFFECT ENGINE ]]
-local function ApplyPopupEffect(btn)
-    btn.MouseButton1Down:Connect(function()
-        btn:TweenSize(UDim2.new(btn.Size.X.Scale, btn.Size.X.Offset - 4, btn.Size.Y.Scale, btn.Size.Y.Offset - 4), "Out", "Quad", 0.08, true)
-    end)
-    btn.MouseButton1Up:Connect(function()
-        btn:TweenSize(UDim2.new(btn.Size.X.Scale, btn.Size.X.Offset, btn.Size.Y.Scale, btn.Size.Y.Offset), "Out", "Back", 0.1, true)
-    end)
-end
-
 -- [[ FOV CIRCLE ]]
 local FG = Instance.new("ScreenGui", L.PlayerGui); FG.Name = "KFov"; FG.ResetOnSpawn = false
 local FC = Instance.new("Frame", FG); FC.BackgroundTransparency = 1; FC.Visible = false; FC.Size = UDim2.new(0, 300, 0, 300); FC.AnchorPoint = Vector2.new(0.5, 0.5); FC.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -86,7 +76,6 @@ end
 -- [[ UI SYSTEM ]]
 local G = Instance.new("ScreenGui", L.PlayerGui); G.Name = "KArchive"; G.ResetOnSpawn = false
 local M = Instance.new("Frame", G); M.Size = UDim2.new(0, 360, 0, 295); M.AnchorPoint = Vector2.new(0.5, 0.5); M.Position = UDim2.new(0.5, 0, 0.5, 0); M.BackgroundColor3 = Color3.fromRGB(15, 15, 15); M.Active = true; M.Draggable = true; Instance.new("UICorner", M)
-local MainStroke = Instance.new("UIStroke", M); MainStroke.Thickness = 2; MainStroke.Color = ThemeColor
 
 local Side = Instance.new("Frame", M); Side.Size = UDim2.new(0, 100, 1, 0); Side.BackgroundColor3 = Color3.fromRGB(22, 22, 22); Instance.new("UICorner", Side); Side.Visible = false
 local Cont = Instance.new("Frame", M); Cont.Position = UDim2.new(0.31, 5, 0, 10); Cont.Size = UDim2.new(0.69, -10, 1, -20); Cont.BackgroundTransparency = 1; Cont.Visible = false
@@ -98,14 +87,14 @@ local AuthTitle = Instance.new("TextLabel", Auth); AuthTitle.Size = UDim2.new(1,
 local AuthBox = Instance.new("TextBox", Auth); AuthBox.Size = UDim2.new(0, 200, 0, 32); AuthBox.Position = UDim2.new(0.5, -100, 0.3, 0); AuthBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30); AuthBox.TextColor3 = Color3.new(1, 1, 1); AuthBox.Font = "GothamBold"; AuthBox.TextSize = 11; AuthBox.Text = ""; AuthBox.PlaceholderText = "Buraya yazın..."
 local AuthStroke = Instance.new("UIStroke", AuthBox); AuthStroke.Color = Color3.fromRGB(60, 60, 60); AuthStroke.Thickness = 1.5
 
-local AuthLink = Instance.new("TextButton", Auth); AuthLink.Size = UDim2.new(1, 0, 0, 35); AuthLink.Position = UDim2.new(0, 0, 0.48, 0); AuthLink.BackgroundTransparency = 1; AuthLink.Text = "Key almak için Telegram kanalımıza katılın\nBağlantı: t.me/kabusc"; AuthLink.TextColor3 = Color3.fromRGB(0, 170, 255); AuthLink.Font = "GothamBold"; AuthLink.TextSize = 9; ApplyPopupEffect(AuthLink)
+local AuthLink = Instance.new("TextButton", Auth); AuthLink.Size = UDim2.new(1, 0, 0, 35); AuthLink.Position = UDim2.new(0, 0, 0.48, 0); AuthLink.BackgroundTransparency = 1; AuthLink.Text = "Key almak için Telegram kanalımıza katılın\nBağlantı: t.me/kabusc"; AuthLink.TextColor3 = Color3.fromRGB(0, 170, 255); AuthLink.Font = "GothamBold"; AuthLink.TextSize = 9
 
-local LangBtn = Instance.new("TextButton", Auth); LangBtn.Size = UDim2.new(0, 140, 0, 28); LangBtn.Position = UDim2.new(0.5, -70, 0.67, 0); LangBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35); LangBtn.Text = "DİLLER / LANGUAGES 🌐"; LangBtn.TextColor3 = Color3.new(1,1,1); LangBtn.Font = "GothamBold"; LangBtn.TextSize = 9; Instance.new("UICorner", LangBtn); ApplyPopupEffect(LangBtn)
+local LangBtn = Instance.new("TextButton", Auth); LangBtn.Size = UDim2.new(0, 140, 0, 28); LangBtn.Position = UDim2.new(0.5, -70, 0.67, 0); LangBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35); LangBtn.Text = "DİLLER / LANGUAGES 🌐"; LangBtn.TextColor3 = Color3.new(1,1,1); LangBtn.Font = "GothamBold"; LangBtn.TextSize = 9; Instance.new("UICorner", LangBtn)
 local LangMenu = Instance.new("Frame", Auth); LangMenu.Size = UDim2.new(0, 140, 0, 110); LangMenu.Position = UDim2.new(0.5, -70, 0.78, 0); LangMenu.BackgroundColor3 = Color3.fromRGB(25, 25, 25); LangMenu.Visible = false; LangMenu.ZIndex = 5; Instance.new("UICorner", LangMenu); local LMS = Instance.new("UIStroke", LangMenu); LMS.Color = Color3.fromRGB(70, 70, 70)
 
 local function ShowNotif(text)
     local bG = Instance.new("ScreenGui", L.PlayerGui); bG.Name = "KNotif"
-    local bF = Instance.new("Frame", bG); bF.Size = UDim2.new(0,250,0,50); bF.Position = UDim2.new(0.5,-125,0,-100); bF.BackgroundColor3 = Color3.fromRGB(30,30,30); Instance.new("UICorner", bF); Instance.new("UIStroke", bF).Color = ThemeColor
+    local bF = Instance.new("Frame", bG); bF.Size = UDim2.new(0,250,0,50); bF.Position = UDim2.new(0.5,-125,0,-100); bF.BackgroundColor3 = Color3.fromRGB(30,30,30); Instance.new("UICorner", bF); Instance.new("UIStroke", bF).Color = Color3.new(1,1,1)
     local bL = Instance.new("TextLabel", bF); bL.Size = UDim2.new(1,0,1,0); bL.BackgroundTransparency = 1; bL.Text = text; bL.TextColor3 = Color3.new(1,1,1); bL.Font = "GothamBold"; bL.TextSize = 10
     bF:TweenPosition(UDim2.new(0.5,-125,0.05,0), "Out", "Back", 0.5)
     task.spawn(function() task.wait(2.5); bF:TweenPosition(UDim2.new(0.5,-125,0,-100), "In", "Quad", 0.5); task.wait(0.6); bG:Destroy() end)
@@ -128,7 +117,7 @@ end
 LangBtn.MouseButton1Click:Connect(function() LangMenu.Visible = not LangMenu.Visible end)
 
 local function AddLangOpt(txt, code, y)
-    local b = Instance.new("TextButton", LangMenu); b.Size = UDim2.new(1, -10, 0, 22); b.Position = UDim2.new(0, 5, 0, y); b.Text = txt; b.BackgroundColor3 = Color3.fromRGB(40, 40, 40); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; b.ZIndex = 6; Instance.new("UICorner", b); ApplyPopupEffect(b)
+    local b = Instance.new("TextButton", LangMenu); b.Size = UDim2.new(1, -10, 0, 22); b.Position = UDim2.new(0, 5, 0, y); b.Text = txt; b.BackgroundColor3 = Color3.fromRGB(40, 40, 40); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; b.ZIndex = 6; Instance.new("UICorner", b)
     b.MouseButton1Click:Connect(function() SetLanguage(code) end)
 end
 AddLangOpt("Türkçe", "TR", 5); AddLangOpt("English", "EN", 30)
@@ -136,7 +125,7 @@ AddLangOpt("Türkçe", "TR", 5); AddLangOpt("English", "EN", 30)
 local Tabs = {}
 local TabButtons = {}
 local function CreateTab(codeKey, y)
-    local b = Instance.new("TextButton", Side); b.Size = UDim2.new(1,-10,0,32); b.Position = UDim2.new(0,5,0,y); b.BackgroundColor3 = Color3.fromRGB(35,35,35); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; Instance.new("UICorner", b); ApplyPopupEffect(b)
+    local b = Instance.new("TextButton", Side); b.Size = UDim2.new(1,-10,0,32); b.Position = UDim2.new(0,5,0,y); b.BackgroundColor3 = Color3.fromRGB(35,35,35); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; Instance.new("UICorner", b)
     local f = Instance.new("ScrollingFrame", Cont); f.Size = UDim2.new(1,0,1,0); f.BackgroundTransparency = 1; f.Visible = false; f.ScrollBarThickness = 0; 
     b.MouseButton1Click:Connect(function() 
         b.BackgroundColor3 = Color3.fromRGB(20,20,20); task.wait(0.1); b.BackgroundColor3 = Color3.fromRGB(35,35,35)
@@ -147,7 +136,7 @@ end
 local hT = CreateTab("Ev", 5); local aT = CreateTab("Aim", 42); local eT = CreateTab("Esp", 79); local mT = CreateTab("Move", 116); local xT = CreateTab("Other", 153)
 
 local hL = Instance.new("TextLabel", hT); hL.Size = UDim2.new(1,0,0,40); hL.Position = UDim2.new(0,0,0,5); hL.Text = "KABUS CHEATS SUNAR 🇹🇷"; hL.TextColor3 = Color3.new(1,1,1); hL.BackgroundTransparency = 1; hL.Font = "GothamBold"; hL.TextSize = 12
-local tBtn = Instance.new("TextButton", hT); tBtn.Size = UDim2.new(1,-20,0,30); tBtn.Position = UDim2.new(0,10,0,50); tBtn.Text = "t.me/kabusc"; tBtn.BackgroundColor3 = Color3.fromRGB(0, 136, 204); tBtn.TextColor3 = Color3.new(1,1,1); tBtn.Font = "GothamBold"; tBtn.TextSize = 11; Instance.new("UICorner", tBtn); ApplyPopupEffect(tBtn)
+local tBtn = Instance.new("TextButton", hT); tBtn.Size = UDim2.new(1,-20,0,30); tBtn.Position = UDim2.new(0,10,0,50); tBtn.Text = "t.me/kabusc"; tBtn.BackgroundColor3 = Color3.fromRGB(0, 136, 204); tBtn.TextColor3 = Color3.new(1,1,1); tBtn.Font = "GothamBold"; tBtn.TextSize = 11; Instance.new("UICorner", tBtn)
 
 tBtn.MouseButton1Click:Connect(function() 
     setclipboard("https://t.me/kabusc")
@@ -158,7 +147,6 @@ local btnList = {}
 local K 
 
 local function UpdateColors()
-    MainStroke.Color = ThemeColor
     for _, i in pairs(btnList) do
         local act = (_G.K[i.f] == (i.val or true))
         if i.f == "S" then act = (_G.K.S == 150) end
@@ -168,7 +156,7 @@ local function UpdateColors()
     if K then K.BackgroundColor3 = ThemeColor end
 end
 
-local ColorMainBtn = Instance.new("TextButton", hT); ColorMainBtn.Size = UDim2.new(1, -20, 0, 30); ColorMainBtn.Position = UDim2.new(0, 10, 0, 90); ColorMainBtn.Text = "RENKLER 🎨"; ColorMainBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35); ColorMainBtn.TextColor3 = Color3.new(1, 1, 1); ColorMainBtn.Font = "GothamBold"; ColorMainBtn.TextSize = 10; Instance.new("UICorner", ColorMainBtn); ApplyPopupEffect(ColorMainBtn)
+local ColorMainBtn = Instance.new("TextButton", hT); ColorMainBtn.Size = UDim2.new(1, -20, 0, 30); ColorMainBtn.Position = UDim2.new(0, 10, 0, 90); ColorMainBtn.Text = "RENKLER 🎨"; ColorMainBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35); ColorMainBtn.TextColor3 = Color3.new(1, 1, 1); ColorMainBtn.Font = "GothamBold"; ColorMainBtn.TextSize = 10; Instance.new("UICorner", ColorMainBtn)
 local ColorScroll = Instance.new("ScrollingFrame", hT); ColorScroll.Size = UDim2.new(1, -20, 0, 110); ColorScroll.Position = UDim2.new(0, 10, 0, 125); ColorScroll.BackgroundColor3 = Color3.fromRGB(22, 22, 22); ColorScroll.Visible = false; ColorScroll.ScrollBarThickness = 3; ColorScroll.CanvasSize = UDim2.new(0, 0, 0, 245); Instance.new("UICorner", ColorScroll); local CSS = Instance.new("UIStroke", ColorScroll); CSS.Color = Color3.fromRGB(50, 50, 50)
 
 ColorMainBtn.MouseButton1Click:Connect(function() ColorScroll.Visible = not ColorScroll.Visible end)
@@ -186,12 +174,12 @@ local ColorsTable = {
 }
 
 for idx, data in ipairs(ColorsTable) do
-    local cb = Instance.new("TextButton", ColorScroll); cb.Size = UDim2.new(1, -10, 0, 24); cb.Position = UDim2.new(0, 5, 0, (idx-1)*27 + 3); cb.Text = data.N; cb.BackgroundColor3 = Color3.fromRGB(40, 40, 40); cb.TextColor3 = data.C; cb.Font = "GothamBold"; cb.TextSize = 9; Instance.new("UICorner", cb); ApplyPopupEffect(cb)
+    local cb = Instance.new("TextButton", ColorScroll); cb.Size = UDim2.new(1, -10, 0, 24); cb.Position = UDim2.new(0, 5, 0, (idx-1)*27 + 3); cb.Text = data.N; cb.BackgroundColor3 = Color3.fromRGB(40, 40, 40); cb.TextColor3 = data.C; cb.Font = "GothamBold"; cb.TextSize = 9; Instance.new("UICorner", cb)
     cb.MouseButton1Click:Connect(function() ThemeColor = data.C; UpdateColors(); ColorScroll.Visible = false end)
 end
 
 local function Add(tab, txtCode, f, y, val)
-    local b = Instance.new("TextButton", tab); b.Size = UDim2.new(1,0,0,28); b.Position = UDim2.new(0,0,0,y); b.BackgroundColor3 = Color3.fromRGB(45,45,45); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; Instance.new("UICorner", b); ApplyPopupEffect(b)
+    local b = Instance.new("TextButton", tab); b.Size = UDim2.new(1,0,0,28); b.Position = UDim2.new(0,0,0,y); b.BackgroundColor3 = Color3.fromRGB(45,45,45); b.TextColor3 = Color3.new(1,1,1); b.Font = "GothamBold"; b.TextSize = 9; Instance.new("UICorner", b)
     table.insert(btnList, {b = b, f = f, val = val, code = txtCode})
     b.MouseButton1Click:Connect(function() 
         b.BackgroundColor3 = Color3.fromRGB(20,20,20); task.wait(0.05)
@@ -206,7 +194,7 @@ end
 -- TABS LOAD DYNAMIC LABELS
 local bSA = Add(aT, "SA", "A", 0); local bSF = Add(aT, "SF", "SF", 33); local bF1 = Add(aT, "F150", "F", 66, 150); local bF2 = Add(aT, "F300", "F", 99, 300); local bF3 = Add(aT, "F500", "F", 132, 500)
 local bEN = Add(eT, "EN", "EN", 0); local bEH = Add(eT, "EH", "EH", 33); local bEY = Add(eT, "EY", "EY", 66); local bEI = Add(eT, "EI", "EI", 99); local bEU = Add(eT, "EU", "EU", 132); local bES = Add(eT, "ES", "ES", 165); local bEB = Add(eT, "EB", "EB", 198); local bHT = Add(eT, "HT", "HT", 231)
-local bX = Add(mT, "X", "X", 0); bX.MouseButton1Click:Connect(function() pcall(function() local a = Instance.new("Animation"); a.AnimationId = "rbxassetid://531962383 "; L.Character.Humanoid:LoadAnimation(a):Play() end) end)
+local bX = Add(mT, "X", "X", 0); bX.MouseButton1Click:Connect(function() pcall(function() local a = Instance.new("Animation"); a.AnimationId = "rbxassetid://531982821"; L.Character.Humanoid:LoadAnimation(a):Play() end) end)
 local bSP = Add(mT, "SP", "SP", 33)
 local bS1 = Add(xT, "S150", "S", 0); local bJ1 = Add(xT, "J150", "J", 33); local bFLY = Add(xT, "FLY", "FLY", 66); local bBH = Add(xT, "BH", "BH", 99); local bWB = Add(xT, "WB", "WB", 132); local bNC = Add(xT, "NC", "NC", 165); local bHB = Add(xT, "HB", "HB", 198); local bINF = Add(xT, "INF", "INF", 231)
 local sel = Add(xT, "Target", "TARG", 264, false); local tp = Add(xT, "GoTo", "TPB", 297, false); local bRP = Add(xT, "RP", "RP", 330)
@@ -260,11 +248,11 @@ RS.RenderStepped:Connect(function()
                     if not part:FindFirstChild("OrigSize") then
                         local orig = Instance.new("Vector3Value", part); orig.Name = "OrigSize"; orig.Value = part.Size
                     end
-                    part.Size = Vector3.new(0.01, 0.01, 0.01)
+                    part.Size = Vector3.new(0.01, 0.01, 0.01) -- Hitboxı imkansız boyuta indir
                 else
                     local orig = part:FindFirstChild("OrigSize")
                     if orig then
-                        part.Size = orig.Value; orig:Destroy()
+                        part.Size = orig.Value; orig:Destroy() -- Kapatıldığında eski boyutuna döndür
                     end
                 end
             end
@@ -354,3 +342,4 @@ task.spawn(function()
         end 
     end
 end)
+            
